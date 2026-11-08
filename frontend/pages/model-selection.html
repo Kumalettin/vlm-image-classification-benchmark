@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Selection - Multimodal Image Classifier</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>🖼️ Image Classifier</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="model-selection.html" class="nav-link active">Model Selection</a></li>
+                <li><a href="classification.html" class="nav-link">Classification</a></li>
+                <li><a href="evaluation.html" class="nav-link">Evaluation</a></li>
+                <li><a href="comparison.html" class="nav-link">Comparison</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="page-header">
+                <h2>Model Selection</h2>
+                <p>Download and manage models from Hugging Face</p>
+            </div>
+
+            <!-- Message Container -->
+            <div id="message-container" class="hidden"></div>
+
+            <!-- Model Download Section -->
+            <div class="content-section">
+                <h3 class="section-title">Download Model</h3>
+                
+                <form id="model-download-form">
+                    <div class="form-group">
+                        <label for="api-key" class="form-label form-label-required">Hugging Face API Key</label>
+                        <input 
+                            type="password" 
+                            id="api-key" 
+                            class="form-input" 
+                            placeholder="Enter your Hugging Face API key"
+                            required
+                        >
+                        <span class="form-help">Your API key is required to download models from Hugging Face. Get one at <a href="https://huggingface.co/settings/tokens" target="_blank">huggingface.co/settings/tokens</a></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="model-name" class="form-label form-label-required">Model Name</label>
+                        <input 
+                            type="text" 
+                            id="model-name" 
+                            class="form-input" 
+                            placeholder="e.g., Salesforce/blip-image-captioning-base"
+                            required
+                        >
+                        <span class="form-help">Enter the full model name from Hugging Face (e.g., Salesforce/blip-image-captioning-base)</span>
+                    </div>
+
+                    <div class="btn-group">
+                        <button type="submit" id="download-btn" class="btn btn-primary">
+                            Download Model
+                        </button>
+                        <button type="button" id="show-models-btn" class="btn btn-outline">
+                            View Downloaded Models
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Loading Container -->
+            <div id="loading-container" class="hidden">
+                <div class="content-section">
+                    <div class="loading-container">
+                        <div class="spinner spinner-lg"></div>
+                        <p class="loading-text">Downloading model from Hugging Face...</p>
+                        <p class="text-secondary">This may take a few minutes depending on the model size</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Downloaded Models Section -->
+            <div id="models-section" class="content-section hidden">
+                <h3 class="section-title">Downloaded Models</h3>
+                <div id="models-list"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Multimodal Image Classifier. Built with ❤️</p>
+        </div>
+    </footer>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/model-selection.js"></script>
+</body>
+</html>

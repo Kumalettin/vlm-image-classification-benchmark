@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparison - Multimodal Image Classifier</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>🖼️ Image Classifier</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="model-selection.html" class="nav-link">Model Selection</a></li>
+                <li><a href="classification.html" class="nav-link">Classification</a></li>
+                <li><a href="evaluation.html" class="nav-link">Evaluation</a></li>
+                <li><a href="comparison.html" class="nav-link active">Comparison</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="page-header">
+                <h2>Model Comparison</h2>
+                <p>Compare performance metrics across different models and evaluation results</p>
+            </div>
+
+            <!-- Message Container -->
+            <div id="message-container" class="hidden"></div>
+
+            <!-- Results Selection Section -->
+            <div class="content-section">
+                <h3 class="section-title">Select Results to Compare</h3>
+                
+                <div id="loading-container" class="hidden">
+                    <div class="loading-container">
+                        <div class="spinner"></div>
+                        <p class="loading-text">Loading available results...</p>
+                    </div>
+                </div>
+
+                <div id="results-selection-container" class="hidden">
+                    <div class="btn-group mb-3">
+                        <button id="select-all-btn" class="btn btn-secondary btn-sm">
+                            Select All
+                        </button>
+                        <button id="deselect-all-btn" class="btn btn-secondary btn-sm">
+                            Deselect All
+                        </button>
+                        <button id="compare-btn" class="btn btn-primary" disabled>
+                            Compare Selected Results
+                        </button>
+                    </div>
+
+                    <div id="results-list" class="card">
+                        <div class="card-body">
+                            <p class="text-secondary">No evaluation results available. Please complete an evaluation first.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comparison Results Section -->
+            <div id="comparison-section" class="content-section hidden">
+                <h3 class="section-title">Comparison Results</h3>
+                
+                <div class="table-container">
+                    <table id="comparison-table" class="table table-sortable">
+                        <thead>
+                            <tr>
+                                <th data-column="model_name">Model Name</th>
+                                <th data-column="date">Date</th>
+                                <th data-column="accuracy">Accuracy</th>
+                                <th data-column="precision">Precision</th>
+                                <th data-column="recall">Recall</th>
+                                <th data-column="f1_score">F1-Score</th>
+                            </tr>
+                        </thead>
+                        <tbody id="comparison-table-body">
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="btn-group mt-3">
+                    <button id="new-comparison-btn" class="btn btn-outline">
+                        New Comparison
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Multimodal Image Classifier. Built with ❤️</p>
+        </div>
+    </footer>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/comparison.js"></script>
+</body>
+</html>

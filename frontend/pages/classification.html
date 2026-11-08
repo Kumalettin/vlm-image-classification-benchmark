@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classification - Multimodal Image Classifier</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>🖼️ Image Classifier</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="model-selection.html" class="nav-link">Model Selection</a></li>
+                <li><a href="classification.html" class="nav-link active">Classification</a></li>
+                <li><a href="evaluation.html" class="nav-link">Evaluation</a></li>
+                <li><a href="comparison.html" class="nav-link">Comparison</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="page-header">
+                <h2>Image Classification</h2>
+                <p>Select a folder of images and define classes for classification</p>
+            </div>
+
+            <div id="message-container" class="hidden"></div>
+
+            <div class="content-section">
+                <h3 class="section-title">Select Model</h3>
+                
+                <div class="form-group">
+                    <label for="modelSelect" class="form-label form-label-required">Choose Model</label>
+                    <select id="modelSelect" class="form-select">
+                        <option value="">Loading models...</option>
+                    </select>
+                    <span class="form-help">Select a downloaded model for classification</span>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h3 class="section-title">Select Images</h3>
+                
+                <div class="form-group">
+                    <label for="folderPathInput" class="form-label form-label-required">Image Folder Path</label>
+                    <input 
+                        type="text" 
+                        id="folderPathInput" 
+                        class="form-input" 
+                        placeholder="Enter full path to image folder (e.g., C:\Users\YourName\Pictures\dataset)"
+                    >
+                    <span class="form-help">Enter the full path to the folder containing images to classify</span>
+                </div>
+
+                <div class="form-group">
+                    <button id="validateFolderButton" class="btn btn-secondary">
+                        Validate Folder
+                    </button>
+                </div>
+
+                <div id="folderInfo" class="hidden">
+                    <div class="card mt-2">
+                        <div class="card-body">
+                            <p><strong>Folder Path:</strong> <span id="folderPath"></span></p>
+                            <p><strong>Status:</strong> <span id="folderStatus" class="badge badge-success">Valid</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h3 class="section-title">Define Classes</h3>
+                
+                <div class="form-group">
+                    <label for="classCount" class="form-label form-label-required">Number of Classes</label>
+                    <input 
+                        type="number" 
+                        id="classCount" 
+                        class="form-input" 
+                        min="2" 
+                        max="50" 
+                        placeholder="Enter number of classes (2-50, e.g., 3)"
+                    >
+                    <span class="form-help">Specify how many classes you want to classify images into (2 - 50)</span>
+                </div>
+
+                <div id="classInputsContainer" class="hidden">
+                    <div class="form-group">
+                        <label class="form-label">Class Names</label>
+                        <div id="classInputs"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h3 class="section-title">Start Classification</h3>
+                
+                <button id="startButton" class="btn btn-primary btn-lg btn-block" disabled>
+                    Start Classification
+                </button>
+
+                <div id="progressContainer" class="hidden mt-3">
+                    <div class="progress">
+                        <div id="progressBar" class="progress-bar progress-bar-striped" style="width: 0%">
+                            0%
+                        </div>
+                    </div>
+                    <p class="text-center mt-2">
+                        <span id="progressText">Processing images...</span>
+                    </p>
+                </div>
+
+                <div id="resultsContainer" class="hidden mt-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Classification Complete</h4>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Prediction ID:</strong> <span id="predictionId"></span></p>
+                            <p><strong>Total Images Processed:</strong> <span id="totalProcessed"></span></p>
+                            <p class="mt-3">You can now proceed to the evaluation page to assess the model's performance.</p>
+                            <div class="btn-group mt-3">
+                                <a href="evaluation.html" class="btn btn-success">Go to Evaluation</a>
+                                <button id="newClassificationButton" class="btn btn-outline">New Classification</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Multimodal Image Classifier. Built with ❤️</p>
+        </div>
+    </footer>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/classification.js"></script>
+</body>
+</html>

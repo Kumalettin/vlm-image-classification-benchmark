@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluation - Multimodal Image Classifier</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>🖼️ Image Classifier</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="model-selection.html" class="nav-link">Model Selection</a></li>
+                <li><a href="classification.html" class="nav-link">Classification</a></li>
+                <li><a href="evaluation.html" class="nav-link active">Evaluation</a></li>
+                <li><a href="comparison.html" class="nav-link">Comparison</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="page-header">
+                <h2>Model Evaluation</h2>
+                <p>Upload ground truth data and evaluate model performance</p>
+            </div>
+
+            <!-- Message Container -->
+            <div id="message-container" class="hidden"></div>
+
+            <!-- Ground Truth Upload Section -->
+            <div class="content-section">
+                <h3 class="section-title">1. Upload Ground Truth</h3>
+                <div class="form-group">
+                    <label for="ground-truth-file" class="form-label form-label-required">
+                        Ground Truth File (JSON)
+                    </label>
+                    <input 
+                        type="file" 
+                        id="ground-truth-file" 
+                        class="form-file-input" 
+                        accept=".json"
+                    >
+                    <span class="form-help">
+                        Upload a JSON file with format: {"image1.jpg": "class1", "image2.jpg": "class2"}
+                    </span>
+                </div>
+                <div id="ground-truth-info" class="hidden mt-2">
+                    <div class="badge badge-success">✓ Ground truth uploaded</div>
+                    <p class="form-help mt-1" id="ground-truth-details"></p>
+                </div>
+            </div>
+
+            <!-- Prediction File Upload Section -->
+            <div class="content-section">
+                <h3 class="section-title">2. Upload Prediction Results</h3>
+                <div class="form-group">
+                    <label for="prediction-file" class="form-label form-label-required">
+                        Prediction File (JSON)
+                    </label>
+                    <input 
+                        type="file" 
+                        id="prediction-file" 
+                        class="form-file-input" 
+                        accept=".json"
+                    >
+                    <span class="form-help">
+                        Upload the prediction JSON file from data/predictions/ folder
+                    </span>
+                </div>
+                <div id="prediction-info" class="hidden mt-2">
+                    <div class="badge badge-success">✓ Prediction file loaded</div>
+                    <p class="form-help mt-1" id="prediction-details"></p>
+                </div>
+            </div>
+
+            <!-- Evaluate Button -->
+            <div class="content-section">
+                <button id="evaluate-btn" class="btn btn-primary btn-lg btn-block" disabled>
+                    Evaluate Model
+                </button>
+            </div>
+
+            <!-- Loading Container -->
+            <div id="loading-container" class="hidden"></div>
+
+            <!-- Results Section -->
+            <div id="results-section" class="hidden">
+                <!-- Metrics Cards -->
+                <div class="content-section">
+                    <h3 class="section-title">Evaluation Metrics</h3>
+                    <div class="card-grid">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <h4 style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.5rem;">Accuracy</h4>
+                                <p id="metric-accuracy" style="font-size: 2.5rem; font-weight: 700; color: var(--primary-color); margin: 0;">-</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <h4 style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.5rem;">Precision</h4>
+                                <p id="metric-precision" style="font-size: 2.5rem; font-weight: 700; color: var(--success-color); margin: 0;">-</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <h4 style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.5rem;">Recall</h4>
+                                <p id="metric-recall" style="font-size: 2.5rem; font-weight: 700; color: var(--warning-color); margin: 0;">-</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <h4 style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.5rem;">F1-Score</h4>
+                                <p id="metric-f1" style="font-size: 2.5rem; font-weight: 700; color: var(--secondary-color); margin: 0;">-</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Confusion Matrix -->
+                <div class="content-section">
+                    <h3 class="section-title">Confusion Matrix</h3>
+                    <div id="confusion-matrix-container" class="text-center">
+                        <p class="text-secondary">Confusion matrix will appear here</p>
+                    </div>
+                </div>
+
+                <!-- Per-Class Metrics -->
+                <div class="content-section">
+                    <h3 class="section-title">Per-Class Metrics</h3>
+                    <div id="per-class-metrics-container">
+                        <p class="text-secondary">Per-class metrics will appear here</p>
+                    </div>
+                </div>
+
+                <!-- Save Results Button -->
+                <div class="content-section">
+                    <button id="save-results-btn" class="btn btn-success btn-lg btn-block">
+                        💾 Save Evaluation Results
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Multimodal Image Classifier. Built with ❤️</p>
+        </div>
+    </footer>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/evaluation.js"></script>
+</body>
+</html>
